@@ -1,97 +1,81 @@
-# PRACTICA 10 - Sistema de ficheros y creación de procesos en Node.js
+# PRACTICA 7 - Digitalizando la colección de música de los abuelos
+
 >Informe para la asignatura de Desarrollo de Sistemas Informáticos
 >
->>**Eric Dürr Sierra** - **eric.durr.20@ull.edu.es**
+>>**Grupo C** - **Última modificación**: 28/03/2022
 >>
->> **Última modificación**: 25/04/2022
-> 
-[![Coverage Status](https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct10-async-fs-process-Eric-Durr/badge.svg?branch=master)](https://coveralls.io/github/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct10-async-fs-process-Eric-Durr?branch=master)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ULL-ESIT-INF-DSI-2122_ull-esit-inf-dsi-21-22-prct10-async-fs-process-Eric-Durr&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ULL-ESIT-INF-DSI-2122_ull-esit-inf-dsi-21-22-prct10-async-fs-process-Eric-Durr)
+>>>[Alejandro Martín de León](alu0101015941@ull.edu.es)
+>>>
+>>>[Eric Dürr Sierra](alu0101027005@ull.edu.es)
+>>>
+>>>[Eric Fumero Arteaga](alu0101105741@ull.edu.es)
+>>>
+>>>[Jeff Pérez Frade](alu0101038520@ull.edu.es)
 
-***CI STATUS***
-
-[![Deploy report](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct10-async-fs-process-Eric-Durr/actions/workflows/deploy.yml/badge.svg)](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct10-async-fs-process-Eric-Durr/actions/workflows/deploy.yml)
-[![Sonar-Cloud Analysis](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct10-async-fs-process-Eric-Durr/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct10-async-fs-process-Eric-Durr/actions/workflows/sonarcloud.yml)
-[![Test and coverage](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct10-async-fs-process-Eric-Durr/actions/workflows/runtests.yml/badge.svg)](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct10-async-fs-process-Eric-Durr/actions/workflows/runtests.yml)
-
+[![Coverage Status](https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct07-music-datamodel-grupo-c/badge.svg?branch=master)](https://coveralls.io/github/ULL-ESIT-INF-DSI-2122/DSI-P06-Eric-Durr-?branch=master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ULL-ESIT-INF-DSI-2122_ull-esit-inf-dsi-21-22-prct07-music-datamodel-grupo-c&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ULL-ESIT-INF-DSI-2122_ull-esit-inf-dsi-21-22-prct07-music-datamodel-grupo-c)
 ***
 
-## [Enlace a la documentación generada con TypeDoc](http://dsi-p10-code-docs.surge.sh/modules.html)
+## [Enlace a la documentación generada con TypeDoc](http://dsi-p07-code-docs.surge.sh/modules.html)
 
 ## Indice
 
-- [PRACTICA 9 - Aplicación de procesamiento de notas de texto](#practica-9---aplicación-de-procesamiento-de-notas-de-texto)
+- [PRACTICA 7 - Digitalizando la colección de música de los abuelos](#practica-7---digitalizando-la-colección-de-música-de-los-abuelos)
   - [Enlace a la documentación generada con TypeDoc](#enlace-a-la-documentación-generada-con-typedoc)
   - [Indice](#indice)
   - [Introducción](#introducción)
   - [Objetivos](#objetivos)
   - [Actividades previas](#actividades-previas)
-  - [Clases del programa](#clases-del-programa)
-    - [Clase Note](#clase-note)
-    - [Clase User](#clase-user)
-  - [Programa principal](#programa-principal)
-    - [Opción de creación de usuario](#opción-de-creación-de-usuario)
-    - [Opción de creación de usuario](#opción-de-creación-de-usuario-1)
-    - [Opción de adición de nota](#opción-de-adición-de-nota)
-    - [Opción de edición de una nota](#opción-de-edición-de-una-nota)
-    - [Opción de lectura de títulos](#opción-de-lectura-de-títulos)
-    - [Opción de lectura de una nota](#opción-de-lectura-de-una-nota)
-    - [Opción de eliminación de una nota](#opción-de-eliminación-de-una-nota)
-  - [Para la ejecución](#para-la-ejecución)
+  - [Elaboración de la práctica](#elaboración-de-la-práctica)
+  - [Uso del menú](#uso-del-menú)
+  - [Conclusiones](#conclusiones)
   - [Referencias](#referencias)
   - [Estructura del directorio](#estructura-del-directorio)
-  - [Comandos para la aplicación de notas](#comandos-para-la-aplicación-de-notas)
   - [Comandos npm del repositorio](#comandos-npm-del-repositorio)
 
 ***
-
 ## Introducción
-
-
 ***
 
 ## Objetivos
-
 ***
-
 ## Actividades previas
-
 ***
 
+## Elaboración de la práctica
+
+
+
+## Conclusiones
+***
 ## Referencias
-
-[Guión de la práctica](https://ull-esit-inf-dsi-2122.github.io/prct10-async-fs-process/)
-
+***
+[Guión de la práctica]()
 
 ## Estructura del directorio
-
 ***
-
 ```txt
-P10/
+P06/
 |____.github/         (Github actions workflow files)
 | |____workflows/
 | | |____deploy.yml
 | | |____runtests.yml
-| | |____sonarcloud.yml
 |____dist/            (Transpiled JavaScript code)
 |____doc/             (Autogenerated TypeDoc documentation files)
 |____docs/            (Assingment report folder)
 | |_____config.yml
 | |____README.md
-|____src/             (Source files for TypeScript code)
+|____images/          (Pokemon text images folder)
+|____src/             (Source files for TypeScript code exercises)
 |____test/            (Test workbench folder)
 |____package.json
 |____.gitignore
 |____.mocharc.json
 |____.eslintrc.json
 |____typedoc.json
-|____sonar-project.properties
 |____tsconfig.json
 
 ```
-
-## Comandos para la aplicación de notas
 
 ## Comandos npm del repositorio
 

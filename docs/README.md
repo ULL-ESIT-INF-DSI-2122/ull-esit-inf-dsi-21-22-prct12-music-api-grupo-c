@@ -1,4 +1,4 @@
-# PRACTICA 7 - Digitalizando la colección de música de los abuelos
+# PRACTICA 12 - REST API
 
 >Informe para la asignatura de Desarrollo de Sistemas Informáticos
 >

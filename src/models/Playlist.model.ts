@@ -11,7 +11,7 @@ const PlaylistSchema = new Schema<PlaylistInterface>({
     require: true,
   },
   seconds: {
-    type: String,
+    type: Number,
     require: true,
   },
   genres: {

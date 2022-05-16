@@ -1,0 +1,23 @@
+import { model, Schema } from 'mongoose';
+import { ArtistInterface } from './artist.interface';
+
+const ArtistSchema = new Schema<ArtistInterface>({
+  name: {
+    type: String,
+    require: true,
+  },
+  genres: {
+    type: Array,
+    require: true,
+  },
+  songs: {
+    type: Array,
+    require: true,
+  },
+  listeners: {
+    type: Array,
+    require: true,
+  },
+});
+
+export const Artist = model<ArtistInterface>('Artist', ArtistSchema);

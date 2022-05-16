@@ -17,4 +17,16 @@ export default {
         res.status(401).json({ success: false, msg: err.msg });
       });
   },
+  deleteArtist: (req: Request, res: Response) => {
+    Artist.deleteOne({
+      name: req.params.artist,
+    }, (err, result) => {
+      if (err) throw err;
+      if (!result) {
+        res.status(401).send({ success: false, msg: 'Update failed. Artist not found.' });
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  },
 };

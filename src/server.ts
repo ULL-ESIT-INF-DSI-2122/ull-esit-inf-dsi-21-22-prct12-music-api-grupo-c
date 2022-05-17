@@ -5,7 +5,7 @@ import app from './app';
 dotenv.config();
 
 // Database config
-const uri: string = process.env.MAIN_DB_URL || '3000';
+const uri: string = process.env.MAIN_DB_URL || 'http://localhost:8080/';
 
 // @ts-ignore
 const options: ConnectOptions = { useNewUrlParser: true, useUnifiedTopology: true };

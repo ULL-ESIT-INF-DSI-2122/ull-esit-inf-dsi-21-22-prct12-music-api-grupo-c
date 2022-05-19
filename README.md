@@ -16,7 +16,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ULL-ESIT-INF-DSI-2122_ull-esit-inf-dsi-21-22-prct07-music-datamodel-grupo-c&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ULL-ESIT-INF-DSI-2122_ull-esit-inf-dsi-21-22-prct07-music-datamodel-grupo-c)
 ***
 
-## [Enlace a la documentación generada con TypeDoc](http://dsi-p07-code-docs.surge.sh/modules.html)
+## [Enlace a la documentación generada con TypeDoc](http://dsi-p12-code-docs.surge.sh/modules.html)
 
 ## Indice
 

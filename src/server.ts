@@ -18,7 +18,6 @@ connect(uri, options)
   .catch((err) => {
     console.error(err.message);
   });
->>>>>>> d76d54050062c3e1ddd9ed0d4e6fef371dfbad95
 
 // Create API Server port
 const port = process.env.PORT || 5000;

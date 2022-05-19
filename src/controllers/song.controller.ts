@@ -3,22 +3,23 @@ import { Song } from '../models/song.model';
 
 export default {
   getAllSongs: (req: Request, res: Response) => {
-    // eslint-disable-next-line array-callback-return
-    Song.find((err, songs) => {
-      if (err) {
-        res.json(err);
-      } else {
-        res.json(songs);
-      }
-    });
+    Song.find({})
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: 'Get failed. Song not found.' });
+        throw err;
+      });
   },
   getSong: (req: Request, res: Response) => {
     Song.findOne({ name: req.params.song })
       .then((result) => {
         res.status(200).json(result);
       })
-      .catch(() => {
+      .catch((err) => {
         res.status(401).send({ success: false, msg: 'Get failed. Song not found.' });
+        throw err;
       });
   },
   addSong: (req: Request, res: Response) => {
@@ -36,6 +37,7 @@ export default {
       })
       .catch((err) => {
         res.status(401).json({ success: false, msg: err.msg });
+        throw err;
       });
   },
   deleteSong: (req: Request, res: Response) => {
@@ -45,6 +47,7 @@ export default {
       })
       .catch((err) => {
         res.status(401).json({ success: false, msg: err.msg });
+        throw err;
       });
   },
 };

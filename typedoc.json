@@ -1,5 +1,9 @@
 {
   "entryPoints": [
+    "src/models/artist.interface.ts",
+    "src/models/artist.model.ts",
+    "src/controllers/artist.controller.ts",
+    "src/routes/artist.route.ts"
   ],
   "out": "doc"
 }

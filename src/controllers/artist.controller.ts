@@ -51,10 +51,8 @@ export default {
         throw err;
       });
   },
-  /**
-   * @ignore
-   */
   getArtistByName: (req: Request, res: Response) => {
+    // @ts-ignore
     Artist.findOne({ name: req.query.name })
       .then((result) => {
         res.status(200).send(result);
@@ -100,10 +98,8 @@ export default {
         throw err;
       });
   },
-  /**
-   * @ignore
-   */
   updateArtistByName: (req: Request, res: Response) => {
+    // @ts-ignore
     Artist.findOneAndUpdate({ name: req.query.name }, req.body)
       .then((result) => {
         res.status(200).json(result);

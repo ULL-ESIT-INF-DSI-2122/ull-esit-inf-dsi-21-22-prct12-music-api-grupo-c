@@ -8,7 +8,11 @@ dotenv.config();
 const uri: string = process.env.MAIN_DB_URL || '3000';
 
 // @ts-ignore
-const options: ConnectOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+const options: ConnectOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+};
 
 connect(uri, options, (err) => {
   if (err) { console.log(err.message); }

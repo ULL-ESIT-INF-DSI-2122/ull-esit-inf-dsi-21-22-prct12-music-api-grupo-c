@@ -12,10 +12,10 @@ export default {
         throw err;
       });
   },
-  getArtist: (req: Request, res: Response) => {
-    Artist.findOne({ name: req.params.artist })
+  getArtistById: (req: Request, res: Response) => {
+    Artist.findOne({ id: req.params.id.toString() })
       .then((result) => {
-        res.status(200).json(result);
+        res.status(200).json({ result });
       })
       .catch((err) => {
         res.status(401).send({ success: false, msg: 'Get failed. Artist not found.' });
@@ -27,11 +27,11 @@ export default {
       name: req.body.name,
       genres: req.body.genres,
       songs: req.body.songs,
-      listeners: req.body.listeners,
+      artistListeners: req.body.artistListeners,
     });
     newArtist.save()
-      .then(() => {
-        res.status(200).json({ exer: newArtist });
+      .then((result) => {
+        res.status(201).json(result);
       })
       .catch((err) => {
         res.status(401).json({ success: false, msg: err.msg });
@@ -40,6 +40,16 @@ export default {
   },
   deleteArtist: (req: Request, res: Response) => {
     Artist.deleteOne({ name: req.params.artist })
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).json({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  updateArtist: (req: Request, res: Response) => {
+    Artist.findOneAndUpdate({ id: req.params.id }, req.body)
       .then((result) => {
         res.status(200).json(result);
       })

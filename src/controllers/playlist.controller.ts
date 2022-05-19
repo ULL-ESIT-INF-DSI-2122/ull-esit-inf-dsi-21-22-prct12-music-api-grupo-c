@@ -10,65 +10,62 @@ export default {
       genres: req.body.genres,
     });
     newPlaylist.save()
-      .then(() => {
-        res.status(200).json({ exer: newPlaylist });
+      .then((playlist) => {
+        res.status(200).json(playlist);
       })
       .catch((err) => {
         res.status(401).json({ success: false, msg: err.msg });
+        throw err;
       });
   },
-  getPlaylist: (req: Request, res: Response) => {
-    Playlist.findOne({
-      name: req.params.exercise,
-    }, (err, exer) => {
-      if (err) throw err;
-      if (!exer) {
-        res.status(401).send({ success: false, msg: 'Update failed. Playlist not found.' });
-      } else {
-        res.status(200).json(exer);
-      }
-    });
+  getAllPlaylist: (req: Request, res: Response) => {
+    Playlist.find({})
+      .then((playlist) => {
+        res.status(200).json(playlist);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: 'Get failed. Playlists not found.' });
+        throw err;
+      });
+  },
+  getPlaylistById: (req: Request, res: Response) => {
+    Playlist.findById(req.params.id)
+      .then((playlist) => {
+        res.status(200).send(playlist);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: 'Get failed. Playlist not found.' });
+        throw err;
+      });
+  },
+  getPlaylistByName: (req: Request, res: Response) => {
+    Playlist.findById(req.params.id)
+      .then((playlist) => {
+        res.status(200).send(playlist);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: 'Get failed. Playlist not found.' });
+        throw err;
+      });
   },
   updatePlaylist: (req: Request, res: Response) => {
-    Playlist.findOne({
-      name: req.params.exercise,
-    }, (err, result) => {
-      if (err) throw err;
-      if (!result) {
-        res.status(401).send({ success: false, msg: 'Update failed. Playlist not found.' });
-      } else {
-        if (req.body.name !== '') {
-          result.name = req.body.name;
-        }
-        if (req.body.songs !== '') {
-          result.songs = req.body.songs;
-        }
-        if (req.body.seconds !== '') {
-          result.seconds = req.body.seconds;
-        }
-        if (req.body.genres !== '') {
-          result.genres = req.body.genres;
-        }
-        result.save()
-          .then(() => {
-            res.status(200).json(result);
-          })
-          .catch((error) => {
-            res.status(400).json({ success: false, msg: error.msg });
-          });
-      }
-    });
+    Playlist.findOneAndUpdate({ id: req.params.id }, req.body)
+      .then((playlist) => {
+        res.status(200).json(playlist);
+      })
+      .catch((err) => {
+        res.status(400).send({ success: false, msg: 'Update failed. Playlist not found.' });
+        throw err;
+      });
   },
   deletePlaylist: (req: Request, res: Response) => {
-    Playlist.deleteOne({
-      name: req.params.name,
-    }, (err, result) => {
-      if (err) throw err;
-      if (!result) {
-        res.status(401).send({ success: false, msg: 'Update failed. Playlist not found.' });
-      } else {
-        res.status(200).json(result);
-      }
-    });
+    Playlist.deleteOne({ id: req.params.id })
+      .then((playlist) => {
+        res.status(200).json(playlist);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: 'Delete failed. Playlist not found.' });
+        throw err;
+      });
   },
 };

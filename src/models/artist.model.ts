@@ -5,6 +5,8 @@ const ArtistSchema = new Schema<ArtistInterface>({
   name: {
     type: String,
     require: true,
+    unique: true,
+    dropDups: true,
   },
   genres: {
     type: Array,
@@ -14,8 +16,8 @@ const ArtistSchema = new Schema<ArtistInterface>({
     type: Array,
     require: true,
   },
-  listeners: {
-    type: Array,
+  artistListeners: {
+    type: Number,
     require: true,
   },
 });

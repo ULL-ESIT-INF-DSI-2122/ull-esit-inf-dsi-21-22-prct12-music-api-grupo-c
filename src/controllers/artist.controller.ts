@@ -3,22 +3,23 @@ import { Artist } from '../models/artist.model';
 
 export default {
   getAllArtists: (req: Request, res: Response) => {
-    // eslint-disable-next-line array-callback-return
-    Artist.find((err, artists) => {
-      if (err) {
-        res.json(err);
-      } else {
-        res.json(artists);
-      }
-    });
+    Artist.find({})
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: 'Get failed. Artists not found.' });
+        throw err;
+      });
   },
   getArtist: (req: Request, res: Response) => {
     Artist.findOne({ name: req.params.artist })
       .then((result) => {
         res.status(200).json(result);
       })
-      .catch(() => {
+      .catch((err) => {
         res.status(401).send({ success: false, msg: 'Get failed. Artist not found.' });
+        throw err;
       });
   },
   addArtist: (req: Request, res: Response) => {
@@ -34,6 +35,7 @@ export default {
       })
       .catch((err) => {
         res.status(401).json({ success: false, msg: err.msg });
+        throw err;
       });
   },
   deleteArtist: (req: Request, res: Response) => {
@@ -43,6 +45,7 @@ export default {
       })
       .catch((err) => {
         res.status(401).json({ success: false, msg: err.msg });
+        throw err;
       });
   },
 };

@@ -51,6 +51,9 @@ export default {
         throw err;
       });
   },
+  /**
+   * @ignore
+   */
   getArtistByName: (req: Request, res: Response) => {
     Artist.findOne({ name: req.query.name })
       .then((result) => {
@@ -97,6 +100,9 @@ export default {
         throw err;
       });
   },
+  /**
+   * @ignore
+   */
   updateArtistByName: (req: Request, res: Response) => {
     Artist.findOneAndUpdate({ name: req.query.name }, req.body)
       .then((result) => {

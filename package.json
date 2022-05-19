@@ -12,7 +12,7 @@
     "test:coverage": "nyc mocha -r ts-node/register 'test/**/*.ts'",
     "get:coverage": "nyc report --reporter=text-lcov",
     "test:watch": "mocha --watch",
-    "docs": " typedoc --options typedoc.json --name \"PE103 - 11/05/2022\" --includeVersion"
+    "docs": " typedoc --options typedoc.json --name \"P12 Grupo C\" --includeVersion"
   },
   "repository": {
     "type": "git",

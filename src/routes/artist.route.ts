@@ -7,7 +7,8 @@ artistRouter.get('/', artistController.matchNameQuery, artistController.getArtis
 artistRouter.get('/', artistController.getAllArtists);
 artistRouter.get('/:id', artistController.getArtistById);
 artistRouter.post('/', artistController.addArtist);
-artistRouter.put('/:id', artistController.updateArtist);
+artistRouter.put('/', artistController.matchNameQuery, artistController.updateArtistByName);
+artistRouter.put('/:id', artistController.updateArtistById);
 artistRouter.delete('/:id', artistController.deleteArtist);
 
 export default artistRouter;

@@ -23,7 +23,6 @@ export default {
         throw err;
       });
   },
-
   getArtistById: (req: Request, res: Response) => {
     Artist.findById(req.params.id)
       .then((result) => {
@@ -60,8 +59,28 @@ export default {
         throw err;
       });
   },
-  updateArtist: (req: Request, res: Response) => {
-    Artist.findOneAndUpdate({ id: req.params.id }, req.body)
+  updateArtistByNameParam: (req: Request, res: Response) => {
+    Artist.findOneAndUpdate({ name: req.params.name }, req.body)
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).json({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  updateArtistByName: (req: Request, res: Response) => {
+    Artist.findOneAndUpdate({ name: req.query.name }, req.body)
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).json({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  updateArtistById: (req: Request, res: Response) => {
+    Artist.findByIdAndUpdate(req.params.id, req.body)
       .then((result) => {
         res.status(200).json(result);
       })

@@ -1,7 +1,8 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { Artist } from '../models/artist.model';
 
 export default {
+  matchNameQuery: (req: Request, res: Response, next: NextFunction) => next(req.query.name ? null : 'route'),
   getAllArtists: (req: Request, res: Response) => {
     Artist.find({})
       .then((result) => {
@@ -12,10 +13,21 @@ export default {
         throw err;
       });
   },
-  getArtistById: (req: Request, res: Response) => {
-    Artist.findOne({ id: req.params.id.toString() })
+  getArtistByName: (req: Request, res: Response) => {
+    Artist.findOne({ name: req.query.name })
       .then((result) => {
-        res.status(200).json({ result });
+        res.status(200).send(result);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: 'Get failed. Artist not found.' });
+        throw err;
+      });
+  },
+
+  getArtistById: (req: Request, res: Response) => {
+    Artist.findById(req.params.id)
+      .then((result) => {
+        res.status(200).send(result);
       })
       .catch((err) => {
         res.status(401).send({ success: false, msg: 'Get failed. Artist not found.' });

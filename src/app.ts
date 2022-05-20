@@ -3,7 +3,7 @@ import path from 'path';
 
 // ROUTES
 // import songs from 'route/songs.router';
-import artist from './routes/artist.route';
+import artists from './routes/artist.route';
 // ------
 
 const app = express();
@@ -17,7 +17,7 @@ app.get('/', (_: express.Request, res: express.Response) => {
 });
 
 // app.use('/songs', songs);
-app.use('/artists', artist);
+app.use('/artists', artists);
 
 // Find 404
 app.all('*', (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -25,4 +25,22 @@ app.all('*', (req: express.Request, res: express.Response, next: express.NextFun
   next();
 });
 
+/**
+ * # Express App
+ *  This object collects all the packages used and configured in Express for this project as well as
+ *  it groups all the API routers
+ *
+ *  ## Used packages:
+ *  - express.json
+ *  - express.static
+ *  - artists
+ *  - songs
+ *  - playlist
+ *
+ *  ## Routes in the App
+ *  - GET: `/` (base route of the API)
+ *  - `/artists/` (all artist related requests)
+ *  - `/songs/` (all artist related requests)
+ *  - `/playlists/` (all artist related requests)
+ */
 export default app;

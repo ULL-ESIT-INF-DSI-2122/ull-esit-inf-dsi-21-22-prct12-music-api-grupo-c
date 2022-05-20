@@ -10,6 +10,10 @@ const options: ConnectOptions = {
   useCreateIndex: true,
 };
 
+/**
+ * # MongoDB connection
+ * This Promise uses an automatic selected uri depending on the environment
+ */
 // MongoDB's connection promise
 connect(uri, options)
   .then(() => {
@@ -23,6 +27,10 @@ connect(uri, options)
 const port = process.env.PORT || 5000;
 
 // Start server Application
+/**
+ * # Express server instantiation
+ * This object is started after port configuration and mongodb connection
+ */
 export default app.listen(port, () => {
   console.log(`API started at port ${port}`);
 });

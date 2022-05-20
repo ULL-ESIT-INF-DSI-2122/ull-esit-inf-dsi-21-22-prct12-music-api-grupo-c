@@ -26,7 +26,8 @@ import { Artist } from '../models/artist.model';
  *    -- Path: /artists
  *    -- Params: none
  *    -- Body: Artist model JSON
- *  - updateArtistByName: finds and updates an artist using the name in the query string with a given JSON
+ *  - updateArtistByName: finds and updates an artist using the name in the query
+ *  string with a given JSON
  *    -- Path: /artists?name=<name to search>
  *    -- Params: none
  *    -- Body: Artist model JSON

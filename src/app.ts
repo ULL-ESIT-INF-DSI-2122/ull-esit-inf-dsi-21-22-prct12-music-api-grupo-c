@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 
 // ROUTES
-// import songs from 'route/songs.router';
+import songs from './routes/song.route';
 import artists from './routes/artist.route';
 // ------
 
@@ -16,7 +16,7 @@ app.get('/', (_: express.Request, res: express.Response) => {
   res.status(200).send('<h1>API PARA LA PRÁCTICA 12 - GRUPO C</h1>');
 });
 
-// app.use('/songs', songs);
+app.use('/songs', songs);
 app.use('/artists', artists);
 
 // Find 404

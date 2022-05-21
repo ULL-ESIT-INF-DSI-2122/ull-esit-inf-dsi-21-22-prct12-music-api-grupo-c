@@ -27,4 +27,19 @@ const SongSchema = new Schema<SongInterface>({
   },
 });
 
+/**
+ * # Song | Mongoose model
+ * The Schema defines a song object for the database
+ * (Uses Song Interface)
+ *
+ * ## Schema shape
+ *
+ * name: String (required)
+ * artist: String (required)
+ * seconds: Number (required)
+ * genres: Array of Strings (required)
+ * single: Boolean (required)
+ * views: Number (not required)
+ */
+
 export const Song = model<SongInterface>('Song', SongSchema);

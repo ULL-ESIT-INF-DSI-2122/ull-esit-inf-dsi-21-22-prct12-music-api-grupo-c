@@ -9,5 +9,6 @@ songRouter.get('/:id', songController.getSongById);
 songRouter.post('/', songController.addSong);
 songRouter.delete('/:id', songController.deleteSong);
 songRouter.put('/', songController.matchNameQuery, songController.updateSongByName);
-songRouter.put('/:id', songController.updateSongById)
+songRouter.put('/:id', songController.updateSongById);
+
 export default songRouter;

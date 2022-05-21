@@ -1,12 +1,64 @@
 import { NextFunction, Request, Response } from 'express';
 import { Playlist } from '../models/playlist.model';
 
+/**
+ *  # Playlist Controller | Queries Object
+ *
+ *  ## Middlewares
+ *
+ *  - matchNameQuery: used to select a route if a query string with name property is sent
+ *
+ *  ## Queries
+ *
+ *  - addPlaylist: add a playlist to the database
+ *    -- Path: /playlists
+ *    -- Params: none
+ *    -- Body: Playlist model JSON
+ *
+ *  - getAllPlaylists: finds all playlists in the database
+ *    -- Path: /playlist
+ *    -- Params: none
+ *    -- Body: none
+ *
+ *  - getPlaylistById: finds a playlist using the playlist ID as param
+ *    -- Path: /playlists/:id
+ *    -- Params: id
+ *    -- Body: none
+ *
+ *  - getPlaylistByName: finds a playlist using the name in the query string
+ *    -- Path: /playlist/?name=<name to search>
+ *    -- Params: none
+ *    -- Body: none
+ *
+ *   - updatePlaylistById: finds and updates a playlist using the playlist ID as param
+ *  with a given JSON
+ *    -- Path: /artist/:id
+ *    -- Params: id
+ *    -- Body: Playlist model JSON
+ *
+ *   - updatePlaylistByName: finds and updates a playlist using the name in the query
+ *  string with a given JSON
+ *    -- Path: /artist/?name=<name to search>
+ *    -- Params: none
+ *    -- Body: Playlist model JSON
+ *
+ *   - deletePlaylistById: delete a playlist using the playlist ID as param
+ *    -- Path: /artist/:id
+ *    -- Params: id
+ *    -- Body: none
+ *
+ *   - deletePlaylistByName: delete a playlist using name in the query string
+ *    -- Path: /artist/?name=<name to search>
+ *    -- Params: id
+ *    -- Body: none
+ */
+
 export default {
   matchNameQuery: (req: Request, res: Response, next: NextFunction) => next(req.query.name ? null : 'route'),
   addPlaylist: (req: Request, res: Response) => {
     const newPlaylist = new Playlist({
       name: req.body.name,
-      songs: req.body.songs,
+      playlists: req.body.playlists,
       seconds: req.body.seconds,
       genres: req.body.genres,
     });
@@ -19,7 +71,7 @@ export default {
         throw err;
       });
   },
-  getAllPlaylist: (req: Request, res: Response) => {
+  getAllPlaylists: (req: Request, res: Response) => {
     Playlist.find({})
       .then((playlist: Object[]) => {
         if (playlist.length === 0) {

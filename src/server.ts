@@ -1,23 +1,36 @@
-import dotenv from 'dotenv';
 import { connect, ConnectOptions } from 'mongoose';
 import app from './app';
 
-dotenv.config();
+// Database config | atlas environment var  OR  local DB for development
+const uri: string = process.env.MAIN_DB_URL || 'mongodb://localhost:27017/';
 
-// Database config
-const uri: string = process.env.MAIN_DB_URL || '3000';
+const options: ConnectOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+};
 
-// @ts-ignore
-const options: ConnectOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+/**
+ * # MongoDB connection
+ * This Promise uses an automatic selected uri depending on the environment
+ */
+// MongoDB's connection promise
+connect(uri, options)
+  .then(() => {
+    console.log(`Database connection successful at ${uri}`);
+  })
+  .catch((err) => {
+    console.error(err.message);
+  });
 
-connect(uri, options, (err) => {
-  if (err) { console.log(err.message); }
-});
-
-// Create port
+// Create API Server port
 const port = process.env.PORT || 5000;
 
-// Start server
+// Start server Application
+/**
+ * # Express server instantiation
+ * This object is started after port configuration and mongodb connection
+ */
 export default app.listen(port, () => {
-  console.log(`Connected to port ${port}`);
+  console.log(`API started at port ${port}`);
 });

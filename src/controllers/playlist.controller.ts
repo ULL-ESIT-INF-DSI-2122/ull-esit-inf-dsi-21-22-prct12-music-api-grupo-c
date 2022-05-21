@@ -74,13 +74,24 @@ export default {
         throw err;
       });
   },
-  deletePlaylist: (req: Request, res: Response) => {
-    Playlist.deleteOne({ name: req.params.playlist })
+  deletePlaylistById: (req: Request, res: Response) => {
+    Playlist.deleteOne({ name: req.params.id })
       .then((playlist) => {
         res.status(200).json(playlist);
       })
       .catch((err) => {
         res.status(400).send({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  deletePlaylistByName: (req: Request, res: Response) => {
+    // @ts-ignore
+    Playlist.deleteOne({ name: req.query.name })
+      .then((playlist) => {
+        res.status(200).json(playlist);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: err.msg });
         throw err;
       });
   },

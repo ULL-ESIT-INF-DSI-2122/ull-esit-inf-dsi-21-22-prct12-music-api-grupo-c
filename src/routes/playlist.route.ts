@@ -8,6 +8,7 @@ playlistRouter.get('/:id', playlistController.getPlaylistById);
 playlistRouter.get('/', playlistController.matchNameQuery, playlistController.getPlaylistByName);
 playlistRouter.put('/:id', playlistController.updatePlaylistById);
 playlistRouter.put('/', playlistController.matchNameQuery, playlistController.updatePlaylistByName);
-playlistRouter.delete('/:id', playlistController.deletePlaylist);
+playlistRouter.delete('/:id', playlistController.deletePlaylistById);
+playlistRouter.delete('/', playlistController.matchNameQuery, playlistController.deletePlaylistByName);
 
 export default playlistRouter;

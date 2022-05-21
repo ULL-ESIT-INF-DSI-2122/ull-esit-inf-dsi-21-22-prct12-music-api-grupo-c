@@ -1,7 +1,8 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { Playlist } from '../models/playlist.model';
 
 export default {
+  matchNameQuery: (req: Request, res: Response, next: NextFunction) => next(req.query.name ? null : 'route'),
   addPlaylist: (req: Request, res: Response) => {
     const newPlaylist = new Playlist({
       name: req.body.name,
@@ -20,7 +21,10 @@ export default {
   },
   getAllPlaylist: (req: Request, res: Response) => {
     Playlist.find({})
-      .then((playlist) => {
+      .then((playlist: Object[]) => {
+        if (playlist.length === 0) {
+          res.status(400).send({ success: false, msg: 'No playlists found in database' });
+        }
         res.status(200).json(playlist);
       })
       .catch((err) => {
@@ -34,12 +38,13 @@ export default {
         res.status(200).send(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: 'Get failed. Playlist not found.' });
+        res.status(400).send({ success: false, msg: 'Get failed. Playlist not found.' });
         throw err;
       });
   },
   getPlaylistByName: (req: Request, res: Response) => {
-    Playlist.findById(req.params.id)
+    // @ts-ignore
+    Playlist.findOne({ name: req.query.name })
       .then((playlist) => {
         res.status(200).send(playlist);
       })
@@ -48,23 +53,34 @@ export default {
         throw err;
       });
   },
-  updatePlaylist: (req: Request, res: Response) => {
-    Playlist.findOneAndUpdate({ id: req.params.id }, req.body)
+  updatePlaylistById: (req: Request, res: Response) => {
+    Playlist.findByIdAndUpdate(req.params.id, req.body)
       .then((playlist) => {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(400).send({ success: false, msg: 'Update failed. Playlist not found.' });
+        res.status(401).send({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  updatePlaylistByName: (req: Request, res: Response) => {
+    // @ts-ignore
+    Playlist.findOneAndUpdate({ name: req.query.name }, req.body)
+      .then((playlist) => {
+        res.status(200).json(playlist);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: err.msg });
         throw err;
       });
   },
   deletePlaylist: (req: Request, res: Response) => {
-    Playlist.deleteOne({ id: req.params.id })
+    Playlist.deleteOne({ name: req.params.playlist })
       .then((playlist) => {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: 'Delete failed. Playlist not found.' });
+        res.status(400).send({ success: false, msg: err.msg });
         throw err;
       });
   },

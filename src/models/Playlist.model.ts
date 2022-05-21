@@ -5,6 +5,8 @@ const PlaylistSchema = new Schema<PlaylistInterface>({
   name: {
     type: String,
     require: true,
+    unique: true,
+    dropDups: true,
   },
   songs: {
     type: Array,

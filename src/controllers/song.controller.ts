@@ -1,6 +1,53 @@
 import { NextFunction, Request, Response } from 'express';
 import { Song } from '../models/song.model';
 
+/**
+ *  # Artist Controller | Queries Object
+ *
+ *  ## Middlewares
+ *
+ *  - matchNameQuery: used to select a route if a query string with name property is sent
+ *
+ *  ## Queries
+ *
+ *  - getAllSongs: finds all songs in the database
+ *    -- Path: /songs
+ *    -- Params: none
+ *    -- Body: none
+ * 
+ *  - getSongByName: finds a song using the name in the query string
+ *    -- Path: /songs?name=<name to search>
+ *    -- Params: none
+ *    -- Body: none
+ * 
+ *  - getSongById: finds a song using the song ID as param
+ *    -- Path: /songs/:id
+ *    -- Params: id
+ *    -- Body: none
+ * 
+ *  - addSong: add a song to the database
+ *    -- Path: /songs
+ *    -- Params: none
+ *    -- Body: Song model JSON
+ * 
+ *   - deleteSong: delete a song using a song ID as param
+ *    -- Path: /artist/:id
+ *    -- Params: id
+ *    -- Body: none
+ * 
+ *   - updateSongByName: finds and update a song using the name in the query
+ *  string with a given JSON
+ *    -- Path: /artist?name=<name to search>
+ *    -- Params: none
+ *    -- Body: Song model JSON
+ * 
+ *   - updateSongByName: finds and updates a song using the song ID as param 
+ *  with a given JSON
+ *    -- Path: /artist/:id
+ *    -- Params: id
+ *    -- Body: Song model JSON
+ */
+
 export default {
   matchNameQuery: (req: Request, res: Response, next: NextFunction) => next(req.query.name ? null : 'route'),
   getAllSongs: (req: Request, res: Response) => {

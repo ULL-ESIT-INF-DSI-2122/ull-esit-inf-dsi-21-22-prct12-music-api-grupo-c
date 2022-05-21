@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { Song } from '../models/song.model';
 
 export default {
+  matchNameQuery: (req: Request, res: Response, next: NextFunction) => next(req.query.name ? null : 'route'),
   getAllSongs: (req: Request, res: Response) => {
-    Song.find({})
+    Song.find()
       .then((result) => {
         res.status(200).json(result);
       })
@@ -22,7 +23,7 @@ export default {
         throw err;
       });
   },
-  getArtistById: (req: Request, res: Response) => {
+  getSongById: (req: Request, res: Response) => {
     Song.findById(req.params.id)
       .then((result) => {
         res.status(200).send(result);
@@ -52,6 +53,27 @@ export default {
   },
   deleteSong: (req: Request, res: Response) => {
     Song.deleteOne({ name: req.params.song })
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).json({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  updateSongByName: (req: Request, res: Response) => {
+    // @ts-ignore
+    Song.findOneAndUpdate({ name: req.query.name }, req.body)
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).json({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  updateSongById: (req: Request, res: Response) => {
+    Song.findByIdAndUpdate(req.params.id, req.body)
       .then((result) => {
         res.status(200).json(result);
       })

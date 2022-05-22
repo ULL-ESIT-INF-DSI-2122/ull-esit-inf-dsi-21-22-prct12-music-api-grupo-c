@@ -41,4 +41,4 @@ jobs:
       - run: git config --global user.email "actions@mail.com"
       - run: git config --global user.name "Github Actions"
       - run: git remote add heroku ${{ secrets.HEROKU_REMOTE }}
-      - run: git push --force heroku master
+      - run: git push heroku HEAD

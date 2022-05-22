@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Song } from '../models/song.model';
 
 /**
- *  # Artist Controller | Queries Object
+ *  # Song Controller | Queries Object
  *
  *  ## Middlewares
  *
@@ -16,7 +16,7 @@ import { Song } from '../models/song.model';
  *    -- Body: none
  *
  *  - getSongByName: finds a song using the name in the query string
- *    -- Path: /songs?name=<name to search>
+ *    -- Path: /songs/?name=<name to search>
  *    -- Params: none
  *    -- Body: none
  *
@@ -30,20 +30,25 @@ import { Song } from '../models/song.model';
  *    -- Params: none
  *    -- Body: Song model JSON
  *
- *   - deleteSong: delete a song using a song ID as param
- *    -- Path: /artist/:id
+ *   - deleteSongById: delete a song using the song ID as param
+ *    -- Path: /songs/:id
+ *    -- Params: id
+ *    -- Body: none
+ *
+ *   - deleteSongByName: delete a song using name in the query string
+ *    -- Path: /songs/?name=<name to search>
  *    -- Params: id
  *    -- Body: none
  *
  *   - updateSongByName: finds and update a song using the name in the query
  *  string with a given JSON
- *    -- Path: /artist?name=<name to search>
+ *    -- Path: /songs/?name=<name to search>
  *    -- Params: none
  *    -- Body: Song model JSON
  *
  *   - updateSongByName: finds and updates a song using the song ID as param
  *  with a given JSON
- *    -- Path: /artist/:id
+ *    -- Path: /songs/:id
  *    -- Params: id
  *    -- Body: Song model JSON
  */
@@ -83,7 +88,7 @@ export default {
   addSong: (req: Request, res: Response) => {
     const newSong = new Song({
       name: req.body.name,
-      artist: req.body.artist,
+      song: req.body.song,
       seconds: req.body.seconds,
       genres: req.body.genres,
       single: req.body.single,

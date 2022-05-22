@@ -17,12 +17,13 @@ artistRouter.delete('/:id', artistController.deleteArtistById);
  * Artists API section
  *
  * ##Routes:
+ * - GET: `/?name=name value` (Get an artist by name)
  * - GET: `/` (Get all artists)
- * - GET: `?name=name value` (Get an artist by name)
  * - GET: `/:id` (Get an artist by ID)
  * - POST: `/` (Post Artist)
- * - PUT: `?name=name value` (Update Artist using name in the query string)
- * - PUT: `/:id` (Udpate Artist by ID)
+ * - PUT: `/?name=name value` (Update artist using name in the query string)
+ * - PUT: `/:id` (Udpate artist by ID)
+ * - DELETE: `/?name=name value` (Delete artist using name in the query string)
  * - DELETE: `/:id` (Delete artist by ID)
  */
 export default artistRouter;

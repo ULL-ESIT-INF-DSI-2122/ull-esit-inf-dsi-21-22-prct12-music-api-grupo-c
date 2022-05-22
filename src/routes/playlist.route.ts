@@ -2,10 +2,10 @@ import { Router } from 'express';
 import playlistController from '../controllers/playlist.controller';
 
 const playlistRouter: Router = Router();
+playlistRouter.get('/', playlistController.matchNameQuery, playlistController.getPlaylistByName);
 playlistRouter.post('/', playlistController.addPlaylist);
 playlistRouter.get('/', playlistController.getAllPlaylists);
 playlistRouter.get('/:id', playlistController.getPlaylistById);
-playlistRouter.get('/', playlistController.matchNameQuery, playlistController.getPlaylistByName);
 playlistRouter.put('/:id', playlistController.updatePlaylistById);
 playlistRouter.put('/', playlistController.matchNameQuery, playlistController.updatePlaylistByName);
 playlistRouter.delete('/', playlistController.matchNameQuery, playlistController.deletePlaylistByName);

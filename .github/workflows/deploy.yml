@@ -40,5 +40,5 @@ jobs:
       - run: npm install
       - run: git config --global user.email "actions@mail.com"
       - run: git config --global user.name "Github Actions"
-      - run: git remote add heroku https://dsi-p12-g-c.herokuapp.com/
+      - run: git remote add heroku https://dashboard.heroku.com/apps/dsi-p12-g-c/
       - run: git push heroku HEAD

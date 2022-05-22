@@ -292,7 +292,90 @@ Cuando el comando de subida del repositorio se ejecuta comienzan las tareas de c
 
 ### Creación de la base de datos en MongoDB Atlas
 
+MongoDB Atlas es un servicio de Cloud Database que permite crear y administrar bases de datos de MongoDB.
+
+Para la creación de la base de datos de este proyecto, un integrante del grupo creó una organización a través del correo institucional, invitando al resto posteriormente. Dentro de la organización, se creó un nuevo proyecto, especificando ciertas características al mismo, como son el nombre, descripción, el proveedor del cluster, entre otros.
+
+En el fichero `server.ts` situado dentro del directorio `src` se encuentra el código que permite realizar una conexión en local de la base de datos de MongoDB: 
+
+```typescript
+// Database config | atlas environment var  OR  local DB for development
+const uri: string = process.env.MAIN_DB_URL || 'mongodb://localhost:27017/';
+
+const options: ConnectOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+};
+
+/**
+ * # MongoDB connection
+ * This Promise uses an automatic selected uri depending on the environment
+ */
+// MongoDB's connection promise
+connect(uri, options)
+  .then(() => {
+    console.log(`Database connection successful at ${uri}`);
+  })
+  .catch((err) => {
+    console.error(err.message);
+  });
+
+// Create API Server port
+const port = process.env.PORT || 5000;
+
+// Start server Application
+/**
+ * # Express server instantiation
+ * This object is started after port configuration and mongodb connection
+ */
+export default app.listen(port, () => {
+  console.log(`API started at port ${port}`);
+});
+```
+
+Se puede observar como principalmente se establecen dos posibles direcciones, o bien la dirección a la base de datos de MongoDB, o bien, se establece la dirección localhost para trabajar en local con la base de datos. Posteriormente se realiza la conexión, donde en caso exitoso, se notifica.
 ### Pruebas con Thunder Client
+
+Con la intención de comprobar el funcionamiento de cada una de las consultas a la API, se han creado a través de la extensión de VSCode ([Thunder Client](https://www.thunderclient.com/)) una serie de colecciones por cada una de las rutas propuesta para el desarrollo de esta práctica. Dichas consultas se encuentran alojadas en la raíz del proyecto.
+
+Accediendo a la extensión, en el apartado de colecciones se ha creado una nueva colección por cada una de las rutas. Dentro de dicha colección se encuentran las distintas consultas hacia la API que comprobarán su funcionamiento.
+
+Para demostrar esto, se va a utilizar la ruta `artists` como ejemplo:
+
+![thunder_client_collections](./images/thunder_client_collections.png)
+
+En la imagen anterior se puede ver el despliegue de la colección de pruebas para la ruta `artists`. Aquí se encuentran cada una de las operaciones CRUD disponibles para esta ruta.
+
+Haciendo click sobre `get all artists`, se despliega una nueva ventana dentro de VSCode, donde se visualizará tanto la operación predefinida como la ruta de acceso (Tal y como se comentó anteriormente, se encuentra desplegado en Heroku). Al pulsar el botón `send`, se mostrará tanto el estado de la respuesta, así como su contenido:
+
+![thunder_client_get_all_artists](./images/thunder_client_get_all_artists.png)
+
+El resto de operaciones GET permiten o bien, encontrar en la base de datos un artista por su nombre o encontrarlo por el ID proporcionado por MongoDB:
+
+![byname](./images/thunder_client_getartistsbyname.png)
+
+Como se puede observar en la imagen anterior, en la ruta se ha establecido la solicitud de un nombre en específico.
+
+Por otro lado, se pueden crear nuevos artistas. La operación POST `create artist` permite añadir una nueva entrada en la base de datos.
+
+![create artist](./images/thunder_client_create_artist.png)
+
+Como se puede observar, dentro del apartado Body de la extensión, se ha adjuntado un objeto JSON con el contenido del nuevo artista a incluir en la base de datos. A la derecha se puede ver como efectivamente ha sido creado el nuevo artista.
+
+Para comprobar esto, se puede volver a realizar una solicitud de todos los artistas:
+
+![all artists](./images/thunder_client_allartists.png)
+
+Como se puede observar en la imagen anterior, actualmente existe una nueva entrada en la base de datos, con los datos proporcionados en el Body de la Solicitud.
+
+La operacion PUT por su parte se encarga de actualizar datos en artistas existentes en la base de datos. En este caso se han creado operaciones tanto para actualizar un dato a través del ID o bien, a través de un nombre.
+
+![updateartist](./images/thunder-client-update-artist.png)
+
+Por último, respecto a la operación DELETE, dunciona de forma similar a la operación PUT; donde se pueden eliminar artistas de la base de datos según su nombre o bien, según su ID.
+
+![deleteartist](./images/thunder-client-delete-artist.png)
 
 ## Dificultades
 

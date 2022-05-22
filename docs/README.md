@@ -320,10 +320,17 @@ Por otro lado, se pueden crear nuevos artistas. La operación POST `create artis
 
 Como se puede observar, dentro del apartado Body de la extensión, se ha adjuntado un objeto JSON con el contenido del nuevo artista a incluir en la base de datos. A la derecha se puede ver como efectivamente ha sido creado el nuevo artista.
 
-Para comprobar esto, se puede volver a realizar una solicitud de todos los artistas: 
+Para comprobar esto, se puede volver a realizar una solicitud de todos los artistas:
 
 ![all artists](./images/thunder_client_allartists.png)
 
+Como se puede observar en la imagen anterior, actualmente existe una nueva entrada en la base de datos, con los datos proporcionados en el Body de la Solicitud.
+
+La operacion PUT por su parte se encarga de actualizar datos en artistas existentes en la base de datos. En este caso se han creado operaciones tanto para actualizar un dato a través del ID o bien, a través de un nombre.
+
+Por último, respecto a la operación DELETE, dunciona de forma similar a la operación PUT; donde se pueden eliminar artistas de la base de datos según su nombre o bien, según su ID.
+
+![deleteartist](./images/thunder-client-delete-artist.png)
 
 ## Dificultades
 

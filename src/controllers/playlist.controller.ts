@@ -67,7 +67,7 @@ export default {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(401).json({ success: false, msg: err.msg });
+        res.status(400).json({ success: false, msg: err.msg });
         throw err;
       });
   },
@@ -80,7 +80,7 @@ export default {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: 'Get failed. Playlists not found.' });
+        res.status(400).send({ success: false, msg: 'Get failed. Playlists not found.' });
         throw err;
       });
   },
@@ -101,7 +101,7 @@ export default {
         res.status(200).send(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: 'Get failed. Playlist not found.' });
+        res.status(400).send({ success: false, msg: 'Get failed. Playlist not found.' });
         throw err;
       });
   },
@@ -111,7 +111,7 @@ export default {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: err.msg });
+        res.status(400).send({ success: false, msg: err.msg });
         throw err;
       });
   },
@@ -122,7 +122,7 @@ export default {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: err.msg });
+        res.status(400).send({ success: false, msg: err.msg });
         throw err;
       });
   },
@@ -138,12 +138,12 @@ export default {
   },
   deletePlaylistByName: (req: Request, res: Response) => {
     // @ts-ignore
-    Playlist.deleteOne({ name: req.query.name })
+    Playlist.findOneAndDelete({ name: req.query.name })
       .then((playlist) => {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: err.msg });
+        res.status(400).send({ success: false, msg: err.msg });
         throw err;
       });
   },

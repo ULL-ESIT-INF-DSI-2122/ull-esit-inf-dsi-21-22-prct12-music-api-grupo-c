@@ -56,7 +56,7 @@ export default {
         res.status(200).json(result);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: 'Get failed. Song not found.' });
+        res.status(400).send({ success: false, msg: 'Get failed. Song not found.' });
         throw err;
       });
   },
@@ -66,7 +66,7 @@ export default {
         res.status(200).json(result);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: 'Get failed. Song not found.' });
+        res.status(400).send({ success: false, msg: 'Get failed. Song not found.' });
         throw err;
       });
   },
@@ -94,7 +94,7 @@ export default {
         res.status(200).json({ exer: newSong });
       })
       .catch((err) => {
-        res.status(401).json({ success: false, msg: err.msg });
+        res.status(400).json({ success: false, msg: err.msg });
         throw err;
       });
   },
@@ -104,7 +104,7 @@ export default {
         res.status(200).json(result);
       })
       .catch((err) => {
-        res.status(401).json({ success: false, msg: err.msg });
+        res.status(400).json({ success: false, msg: err.msg });
         throw err;
       });
   },
@@ -115,7 +115,7 @@ export default {
         res.status(200).json(result);
       })
       .catch((err) => {
-        res.status(401).json({ success: false, msg: err.msg });
+        res.status(400).json({ success: false, msg: err.msg });
         throw err;
       });
   },
@@ -126,7 +126,7 @@ export default {
         res.status(200).json(result);
       })
       .catch((err) => {
-        res.status(401).json({ success: false, msg: err.msg });
+        res.status(400).json({ success: false, msg: err.msg });
         throw err;
       });
   },
@@ -136,7 +136,7 @@ export default {
         res.status(200).json(result);
       })
       .catch((err) => {
-        res.status(401).json({ success: false, msg: err.msg });
+        res.status(400).json({ success: false, msg: err.msg });
         throw err;
       });
   },

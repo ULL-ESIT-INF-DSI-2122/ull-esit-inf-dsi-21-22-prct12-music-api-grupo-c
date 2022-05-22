@@ -294,6 +294,37 @@ Cuando el comando de subida del repositorio se ejecuta comienzan las tareas de c
 
 ### Pruebas con Thunder Client
 
+Con la intención de comprobar el funcionamiento de cada una de las consultas a la API, se han creado a través de la extensión de VSCode ([Thunder Client](https://www.thunderclient.com/)) una serie de colecciones por cada una de las rutas propuesta para el desarrollo de esta práctica. Dichas consultas se encuentran alojadas en la raíz del proyecto.
+
+Accediendo a la extensión, en el apartado de colecciones se ha creado una nueva colección por cada una de las rutas. Dentro de dicha colección se encuentran las distintas consultas hacia la API que comprobarán su funcionamiento.
+
+Para demostrar esto, se va a utilizar la ruta `artists` como ejemplo:
+
+![thunder_client_collections](./images/thunder_client_collections.png)
+
+En la imagen anterior se puede ver el despliegue de la colección de pruebas para la ruta `artists`. Aquí se encuentran cada una de las operaciones CRUD disponibles para esta ruta.
+
+Haciendo click sobre `get all artists`, se despliega una nueva ventana dentro de VSCode, donde se visualizará tanto la operación predefinida como la ruta de acceso (Tal y como se comentó anteriormente, se encuentra desplegado en Heroku). Al pulsar el botón `send`, se mostrará tanto el estado de la respuesta, así como su contenido:
+
+![thunder_client_get_all_artists](./images/thunder_client_get_all_artists.png)
+
+El resto de operaciones GET permiten o bien, encontrar en la base de datos un artista por su nombre o encontrarlo por el ID proporcionado por MongoDB:
+
+![byname](./images/thunder_client_getartistsbyname.png)
+
+Como se puede observar en la imagen anterior, en la ruta se ha establecido la solicitud de un nombre en específico.
+
+Por otro lado, se pueden crear nuevos artistas. La operación POST `create artist` permite añadir una nueva entrada en la base de datos.
+
+![create artist](./images/thunder_client_create_artist.png)
+
+Como se puede observar, dentro del apartado Body de la extensión, se ha adjuntado un objeto JSON con el contenido del nuevo artista a incluir en la base de datos. A la derecha se puede ver como efectivamente ha sido creado el nuevo artista.
+
+Para comprobar esto, se puede volver a realizar una solicitud de todos los artistas: 
+
+![all artists](./images/thunder_client_allartists.png)
+
+
 ## Dificultades
 
 - uso deprecado del método update() de mongoose

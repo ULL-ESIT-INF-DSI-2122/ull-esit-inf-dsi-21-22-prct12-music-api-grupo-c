@@ -38,9 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: npm install
-      - run: git add .
       - run: git config --global user.email "actions@mail.com"
       - run: git config --global user.name "Github Actions"
-      - run: git commit -m "update"
-      - run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-      - run: git push --force heroku `git subtree split --prefix torch-back`:main
+      - run: git remote add heroku ${{ secrets.HEROKU_REMOTE }}
+      - run: git push --force heroku master

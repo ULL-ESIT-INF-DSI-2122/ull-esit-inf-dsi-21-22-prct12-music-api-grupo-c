@@ -16,7 +16,7 @@ import { Playlist } from '../models/playlist.model';
  *    -- Body: Playlist model JSON
  *
  *  - getAllPlaylists: finds all playlists in the database
- *    -- Path: /playlist
+ *    -- Path: /playlists
  *    -- Params: none
  *    -- Body: none
  *
@@ -26,30 +26,30 @@ import { Playlist } from '../models/playlist.model';
  *    -- Body: none
  *
  *  - getPlaylistByName: finds a playlist using the name in the query string
- *    -- Path: /playlist?name=<name to search>
+ *    -- Path: /playlists/?name=<name to search>
  *    -- Params: none
  *    -- Body: none
  *
  *   - updatePlaylistById: finds and updates a playlist using the playlist ID as param
  *  with a given JSON
- *    -- Path: /artist/:id
+ *    -- Path: /playlists/:id
  *    -- Params: id
  *    -- Body: Playlist model JSON
  *
  *   - updatePlaylistByName: finds and updates a playlist using the name in the query
  *  string with a given JSON
- *    -- Path: /artist?name=<name to search>
+ *    -- Path: /playlists/?name=<name to search>
  *    -- Params: none
  *    -- Body: Playlist model JSON
  *
  *   - deletePlaylistById: delete a playlist using the playlist ID as param
- *    -- Path: /artist/:id
+ *    -- Path: /playlists/:id
  *    -- Params: id
  *    -- Body: none
  *
  *   - deletePlaylistByName: delete a playlist using name in the query string
- *    -- Path: /artist?name=<name to search>
- *    -- Params: id
+ *    -- Path: /playlists/?name=<name to search>
+ *    -- Params: none
  *    -- Body: none
  */
 

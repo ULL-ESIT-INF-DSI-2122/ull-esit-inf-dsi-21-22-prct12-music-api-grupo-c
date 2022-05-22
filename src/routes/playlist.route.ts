@@ -16,14 +16,14 @@ playlistRouter.delete('/:id', playlistController.deletePlaylistById);
  * Playlists API section
  *
  * ##Routes:
- * - GET: `/` (Get all playlists)
- * - GET: `?name=name value` (Get a playlist by name)
- * - GET: `/:id` (Get a playlist by ID)
  * - POST: `/` (Post Playlist)
- * - PUT: `?name=name value` (Update Playlist using name in the query string)
+ * - GET: `/` (Get all playlists)
+ * - GET: `/?name=name value` (Get a playlist by name)
+ * - GET: `/:id` (Get a playlist by ID)
  * - PUT: `/:id` (Udpate Playlist by ID)
+ * - PUT: `/?name=name value` (Update Playlist using name in the query string)
+ * - DELETE: `/?name=name value` (Delete playlist using name in the query string)
  * - DELETE: `/:id` (Delete playlist by ID)
- * - DELETE: `?name=name value` (Delete playlist using name in the query string)
  */
 
 export default playlistRouter;

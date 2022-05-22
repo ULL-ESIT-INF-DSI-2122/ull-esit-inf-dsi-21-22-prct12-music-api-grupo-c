@@ -14,23 +14,38 @@ import { Artist } from '../models/artist.model';
  *    -- Path: /artists
  *    -- Params: none
  *    -- Body: none
+ *
  *  - getArtistByName: finds an artist using the name in the query string
  *    -- Path: /artists?name=<name to search>
  *    -- Params: none
  *    -- Body: none
+ *
  *  - getArtistById: finds an artist using the artist ID as param
  *    -- Path: /artists/:id
  *    -- Params: id
  *    -- Body: none
+ *
  *  - addArtist: Adds an artist to the database
  *    -- Path: /artists
  *    -- Params: none
  *    -- Body: Artist model JSON
+ *
+ *   - deleteSongById: delete a song using the song ID as param
+ *    -- Path: /artists/:id
+ *    -- Params: id
+ *    -- Body: none
+ *
+ *   - deleteSongByName: delete a song using name in the query string
+ *    -- Path: /artists/?name=<name to search>
+ *    -- Params: none
+ *    -- Body: none
+ *
  *  - updateArtistByName: finds and updates an artist using the name in the query
  *  string with a given JSON
  *    -- Path: /artists?name=<name to search>
  *    -- Params: none
  *    -- Body: Artist model JSON
+ *
  *  - updateArtistById: finds and updates an artist using the artist ID as param with a given JSON
  *    -- Path: /artists/:id
  *    -- Params: id

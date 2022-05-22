@@ -18,12 +18,13 @@ songRouter.delete('/:id', songController.deleteSongById);
  *
  * ##Routes:
  * - GET: `/` (Get all songs)
- * - GET: `?name=name value` (Get a song by name)
+ * - GET: `/?name=name value` (Get a song by name)
  * - GET: `/:id` (Get a song by ID)
- * - POST: `/` (Post Song)
- * - PUT: `?name=name value` (Update Song using name in the query string)
- * - PUT: `/:id` (Udpate Song by ID)
+ * - POST: `/` (Post song)
+ * - PUT: `/?name=name value` (Update song using name in the query string)
+ * - PUT: `/:id` (Udpate song by ID)
  * - DELETE: `/:id` (Delete song by ID)
+ * - DELETE: `/?name=name value` (Delete song using name in the query string)
  */
 
 export default songRouter;

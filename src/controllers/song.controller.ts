@@ -104,7 +104,18 @@ export default {
       });
   },
   deleteSongById: (req: Request, res: Response) => {
-    Song.deleteOne({ name: req.params.song })
+    Song.findByIdAndDelete(req.params.id)
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).json({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  deleteSongByName: (req: Request, res: Response) => {
+    // @ts-ignore
+    Song.findOneAndDelete({ name: req.query.name })
       .then((result) => {
         res.status(200).json(result);
       })

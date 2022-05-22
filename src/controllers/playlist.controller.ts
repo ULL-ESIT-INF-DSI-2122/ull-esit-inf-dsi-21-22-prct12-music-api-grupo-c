@@ -127,7 +127,7 @@ export default {
       });
   },
   deletePlaylistById: (req: Request, res: Response) => {
-    Playlist.deleteOne({ name: req.params.id })
+    Playlist.findByIdAndDelete(req.params.id)
       .then((playlist) => {
         res.status(200).json(playlist);
       })

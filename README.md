@@ -29,7 +29,7 @@
     - [Creación de las interfaces de los objetos de la aplicación](#creación-de-las-interfaces-de-los-objetos-de-la-aplicación)
     - [*Schema* y modelos de Mongoose](#schema-y-modelos-de-mongoose)
     - [controladores para cada sección de la API](#controladores-para-cada-sección-de-la-api)
-    - [Implementación de los router para cada sección de la API](#implementación-de-los-router-para-cada-sección-de-la-api)
+    - [Implementación de los routes para cada sección de la API](#implementación-de-los-routes-para-cada-sección-de-la-api)
     - [Configuración e instanciación de la App de Express](#configuración-e-instanciación-de-la-app-de-express)
     - [Configuración, Ejecución y lanzamiento de los servicios](#configuración-ejecución-y-lanzamiento-de-los-servicios)
     - [Publicación en Heroku](#publicación-en-heroku)
@@ -100,11 +100,109 @@ Este diseño, en su conjunto, permite una mejor visión general de cómo se comu
 
 ### Creación de las interfaces de los objetos de la aplicación
 
+Hemos creado varias interfaces para poder definir cómo deberían estructurarse los *Schemas* de los diferentes objetos de nuestra BBDD (artists, songs y playlists), estas interfaces son bastantes sencillas ya que sólo contienen los diferentes tipos de datos con los que cuenta cada objeto, en este caso ponemos el ejemplo de las playlists:
+
+```TS
+export interface PlaylistInterface {
+  name: string,
+  songs: string[],
+  seconds: number,
+  genres: string[]
+}
+```
+
+Como podemos ver lo único que hacemos es crear una interfaz para definir qué datos contiene dicho objeto y de qué tipos se tratan. Como hemos mencionado anteriormente estas interfaces se encuentran dentro de la carpeta `models`.
+
 ### *Schema* y modelos de Mongoose
+
+Con las interfaces definidas comenzaremos a realizar los schemas y modelos de los diferentes objetos de nuestra API. Para realizar el *schema* hemos seguido los mismos pasos en todos los casos (artists, songs y playlists).
+
+Primero creamos el schema de mongoose indicando los datos que tiene cada objeto, su tipo, si son obligatorios (en nuestro caso hemos decidido poner que todos los datos son obligatorios excepto las escuchas de las canciones) y si son únicos o no (en nuestro caso hemos decidido poner como valores únicos el nombre de los artistas y las playlists). Con esto hecho crearemos el modelo a partir del schema realizado y lo exportaremos para su uso, en este caso ponemos el ejemplo de las playlists:
+
+```TS
+const PlaylistSchema = new Schema<PlaylistInterface>({
+  name: {
+    type: String,
+    require: true,
+    unique: true,
+    dropDups: true,
+  },
+  songs: {
+    type: Array,
+    require: true,
+  },
+  seconds: {
+    type: Number,
+    require: true,
+  },
+  genres: {
+    type: Array,
+    require: true,
+  },
+});
+
+export const Playlist = model<PlaylistInterface>('Playlist', PlaylistSchema);
+```
 
 ### controladores para cada sección de la API
 
-### Implementación de los router para cada sección de la API
+Con todo lo anterior realizado nos dispondremos a configurar los controladores para cada sección de la API, para ello creamos un fichero para cada sección en la que definiremos el comportamiento de cada una. Es decir, creamos controladores que tratarán de un conjunto de propiedades las cuales tendrán definidas el comportamiento de cada funcionalidad (add, update, delete, etc). En este caso ponemos un pequeño ejemplo del controlador de las playlist:
+
+```TS
+export default {
+  matchNameQuery: (req: Request, res: Response, next: NextFunction) => next(req.query.name ? null : 'route'),
+  addPlaylist: (req: Request, res: Response) => {
+    const newPlaylist = new Playlist({
+      name: req.body.name,
+      playlists: req.body.playlists,
+      seconds: req.body.seconds,
+      genres: req.body.genres,
+    });
+    newPlaylist.save()
+      .then((playlist) => {
+        res.status(200).json(playlist);
+      })
+      .catch((err) => {
+        res.status(401).json({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  getAllPlaylists: (req: Request, res: Response) => {
+    Playlist.find({})
+      .then((playlist: Object[]) => {
+        if (playlist.length === 0) {
+          res.status(400).send({ success: false, msg: 'No playlists found in database' });
+        }
+        res.status(200).json(playlist);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: 'Get failed. Playlists not found.' });
+        throw err;
+      });
+  },
+                  ...
+}
+```
+
+Como hemos mencionado en el controlador se define el comportamiento de cada propiedad para luego poder relacionarlo con la ruta específica de la API que hará uso de dicha propiedad, esto se realizará en el siguiente punto.
+
+### Implementación de los routes para cada sección de la API
+
+Para finalizar la implementación asociada a cada sección de la API nos falta implementar las rutas para cada sección, para ello definiremos un objeto `Router` de express que será el que se encargue de conectar las funcionalidades mencionadas en el punto anterior con las diferentes llamadas que se le pueden hacer a nuestra API. Con dicho objeto le diremos las diferentes peticiones que se realizan a nuestra api (get, post, delete, etc) junto a la ruta a la que se realizará dicha petición y las propiedades definidas anteriormente que necesitaremos para que la petición funcione correctamente, en este caso ponemos un pequeño ejemplo del router de las playlist:
+
+```TS
+const playlistRouter: Router = Router();
+playlistRouter.post('/', playlistController.addPlaylist);
+playlistRouter.get('/', playlistController.getAllPlaylists);
+playlistRouter.get('/:id', playlistController.getPlaylistById);
+playlistRouter.get('/', playlistController.matchNameQuery, playlistController.getPlaylistByName);
+playlistRouter.put('/:id', playlistController.updatePlaylistById);
+playlistRouter.put('/', playlistController.matchNameQuery, playlistController.updatePlaylistByName);
+playlistRouter.delete('/', playlistController.matchNameQuery, playlistController.deletePlaylistByName);
+playlistRouter.delete('/:id', playlistController.deletePlaylistById);
+
+export default playlistRouter;
+```
 
 ### Configuración e instanciación de la App de Express
 

@@ -206,7 +206,7 @@ Cuando el comando de subida del repositorio se ejecuta comienzan las tareas de c
 ## Conclusiones
 En conclusión esta práctica no ha sido muy complicada en cuanto a conocimientos técnicos, ya que teníamos suficiente práctica como para llevarlo a cabo sin buscar demasiada documentación.
 
-Por otro lado, otro problema que se ha encontrado es la falta de tiempo efectivo para poder desarrollar de manera un poco mas optimizada  la práctica del modo que hemos planteado. 
+Por otro lado, otro problema que se ha encontrado es la falta de tiempo efectivo para poder desarrollar de manera un poco mas optimizada  la práctica del modo que hemos planteado.
 
 En ciertas partes del código nos hubiese gustado añadir alguna que otra opción extra como por ejemplo los tests con la novedad Node versión 18 o poder hacer una estructura relacional entre las colecciones involucradas.
 ***

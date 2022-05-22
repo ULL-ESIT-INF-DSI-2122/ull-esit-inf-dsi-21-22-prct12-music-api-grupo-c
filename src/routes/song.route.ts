@@ -7,7 +7,8 @@ songRouter.get('/', songController.matchNameQuery, songController.getSongByName)
 songRouter.get('/', songController.getAllSongs);
 songRouter.get('/:id', songController.getSongById);
 songRouter.post('/', songController.addSong);
-songRouter.delete('/:id', songController.deleteSong);
+songRouter.delete('/', songController.matchNameQuery, songController.deleteSongByName);
+songRouter.delete('/:id', songController.deleteSongById);
 songRouter.put('/', songController.matchNameQuery, songController.updateSongByName);
 songRouter.put('/:id', songController.updateSongById);
 
@@ -23,6 +24,7 @@ songRouter.put('/:id', songController.updateSongById);
  * - PUT: `?name=name value` (Update Song using name in the query string)
  * - PUT: `/:id` (Udpate Song by ID)
  * - DELETE: `/:id` (Delete song by ID)
+ * - DELETE: `/?name=name value` (Delete song using name in the query string)
  */
 
 export default songRouter;

@@ -31,24 +31,24 @@ import { Song } from '../models/song.model';
  *    -- Body: Song model JSON
  *
  *   - deleteSongById: delete a song using the song ID as param
- *    -- Path: /song/:id
+ *    -- Path: /songs/:id
  *    -- Params: id
  *    -- Body: none
  *
  *   - deleteSongByName: delete a song using name in the query string
- *    -- Path: /song/?name=<name to search>
+ *    -- Path: /songs/?name=<name to search>
  *    -- Params: id
  *    -- Body: none
  *
  *   - updateSongByName: finds and update a song using the name in the query
  *  string with a given JSON
- *    -- Path: /song/?name=<name to search>
+ *    -- Path: /songs/?name=<name to search>
  *    -- Params: none
  *    -- Body: Song model JSON
  *
  *   - updateSongByName: finds and updates a song using the song ID as param
  *  with a given JSON
- *    -- Path: /song/:id
+ *    -- Path: /songs/:id
  *    -- Params: id
  *    -- Body: Song model JSON
  */

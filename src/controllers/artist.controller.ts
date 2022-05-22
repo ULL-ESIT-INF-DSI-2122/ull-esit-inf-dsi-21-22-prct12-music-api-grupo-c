@@ -14,23 +14,38 @@ import { Artist } from '../models/artist.model';
  *    -- Path: /artists
  *    -- Params: none
  *    -- Body: none
+ *
  *  - getArtistByName: finds an artist using the name in the query string
- *    -- Path: /artists?name=<name to search>
+ *    -- Path: /artists/?name=<name to search>
  *    -- Params: none
  *    -- Body: none
+ *
  *  - getArtistById: finds an artist using the artist ID as param
  *    -- Path: /artists/:id
  *    -- Params: id
  *    -- Body: none
+ *
  *  - addArtist: Adds an artist to the database
  *    -- Path: /artists
  *    -- Params: none
  *    -- Body: Artist model JSON
+ *
+ *   - deleteArtistById: delete an artist using the artist ID as param
+ *    -- Path: /artists/:id
+ *    -- Params: id
+ *    -- Body: none
+ *
+ *   - deleteArtistByName: delete an artist using name in the query string
+ *    -- Path: /artists/?name=<name to search>
+ *    -- Params: id
+ *    -- Body: none
+ *
  *  - updateArtistByName: finds and updates an artist using the name in the query
  *  string with a given JSON
- *    -- Path: /artists?name=<name to search>
+ *    -- Path: /artists/?name=<name to search>
  *    -- Params: none
  *    -- Body: Artist model JSON
+ *
  *  - updateArtistById: finds and updates an artist using the artist ID as param with a given JSON
  *    -- Path: /artists/:id
  *    -- Params: id
@@ -96,6 +111,17 @@ export default {
       })
       .catch((err) => {
         res.status(400).json({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  deleteArtistByName: (req: Request, res: Response) => {
+    // @ts-ignore
+    Artist.deleteOne({ name: req.query.name })
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: err.msg });
         throw err;
       });
   },

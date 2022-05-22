@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Song } from '../models/song.model';
 
 /**
- *  # Artist Controller | Queries Object
+ *  # Song Controller | Queries Object
  *
  *  ## Middlewares
  *
@@ -14,36 +14,41 @@ import { Song } from '../models/song.model';
  *    -- Path: /songs
  *    -- Params: none
  *    -- Body: none
- * 
+ *
  *  - getSongByName: finds a song using the name in the query string
- *    -- Path: /songs?name=<name to search>
+ *    -- Path: /songs/?name=<name to search>
  *    -- Params: none
  *    -- Body: none
- * 
+ *
  *  - getSongById: finds a song using the song ID as param
  *    -- Path: /songs/:id
  *    -- Params: id
  *    -- Body: none
- * 
+ *
  *  - addSong: add a song to the database
  *    -- Path: /songs
  *    -- Params: none
  *    -- Body: Song model JSON
- * 
- *   - deleteSong: delete a song using a song ID as param
- *    -- Path: /artist/:id
+ *
+ *   - deleteSongById: delete a song using the song ID as param
+ *    -- Path: /song/:id
  *    -- Params: id
  *    -- Body: none
- * 
+ *
+ *   - deleteSongByName: delete a song using name in the query string
+ *    -- Path: /song/?name=<name to search>
+ *    -- Params: id
+ *    -- Body: none
+ *
  *   - updateSongByName: finds and update a song using the name in the query
  *  string with a given JSON
- *    -- Path: /artist?name=<name to search>
+ *    -- Path: /song/?name=<name to search>
  *    -- Params: none
  *    -- Body: Song model JSON
- * 
- *   - updateSongByName: finds and updates a song using the song ID as param 
+ *
+ *   - updateSongByName: finds and updates a song using the song ID as param
  *  with a given JSON
- *    -- Path: /artist/:id
+ *    -- Path: /song/:id
  *    -- Params: id
  *    -- Body: Song model JSON
  */
@@ -83,7 +88,7 @@ export default {
   addSong: (req: Request, res: Response) => {
     const newSong = new Song({
       name: req.body.name,
-      artist: req.body.artist,
+      song: req.body.song,
       seconds: req.body.seconds,
       genres: req.body.genres,
       single: req.body.single,
@@ -98,13 +103,24 @@ export default {
         throw err;
       });
   },
-  deleteSong: (req: Request, res: Response) => {
+  deleteSongById: (req: Request, res: Response) => {
     Song.deleteOne({ name: req.params.song })
       .then((result) => {
         res.status(200).json(result);
       })
       .catch((err) => {
         res.status(401).json({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  deleteSongByName: (req: Request, res: Response) => {
+    // @ts-ignore
+    Song.deleteOne({ name: req.query.name })
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: err.msg });
         throw err;
       });
   },

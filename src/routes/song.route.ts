@@ -7,9 +7,10 @@ songRouter.get('/', songController.matchNameQuery, songController.getSongByName)
 songRouter.get('/', songController.getAllSongs);
 songRouter.get('/:id', songController.getSongById);
 songRouter.post('/', songController.addSong);
-songRouter.delete('/:id', songController.deleteSong);
 songRouter.put('/', songController.matchNameQuery, songController.updateSongByName);
 songRouter.put('/:id', songController.updateSongById);
+songRouter.delete('/', songController.matchNameQuery, songController.deleteSongByName);
+songRouter.delete('/:id', songController.deleteSongById);
 
 /**
  * # Songs Router | Express Router object

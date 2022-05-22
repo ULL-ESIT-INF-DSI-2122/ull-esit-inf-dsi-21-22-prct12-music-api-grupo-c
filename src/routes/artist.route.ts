@@ -9,7 +9,8 @@ artistRouter.get('/:id', artistController.getArtistById);
 artistRouter.post('/', artistController.addArtist);
 artistRouter.put('/', artistController.matchNameQuery, artistController.updateArtistByName);
 artistRouter.put('/:id', artistController.updateArtistById);
-artistRouter.delete('/:id', artistController.deleteArtist);
+artistRouter.delete('/', artistController.matchNameQuery, artistController.deleteArtistByName);
+artistRouter.delete('/:id', artistController.deleteArtistById);
 
 /**
  * # Artist Router | Express Router object

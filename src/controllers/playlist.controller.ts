@@ -26,7 +26,7 @@ import { Playlist } from '../models/playlist.model';
  *    -- Body: none
  *
  *  - getPlaylistByName: finds a playlist using the name in the query string
- *    -- Path: /playlist/?name=<name to search>
+ *    -- Path: /playlist?name=<name to search>
  *    -- Params: none
  *    -- Body: none
  *
@@ -38,7 +38,7 @@ import { Playlist } from '../models/playlist.model';
  *
  *   - updatePlaylistByName: finds and updates a playlist using the name in the query
  *  string with a given JSON
- *    -- Path: /artist/?name=<name to search>
+ *    -- Path: /artist?name=<name to search>
  *    -- Params: none
  *    -- Body: Playlist model JSON
  *
@@ -48,7 +48,7 @@ import { Playlist } from '../models/playlist.model';
  *    -- Body: none
  *
  *   - deletePlaylistByName: delete a playlist using name in the query string
- *    -- Path: /artist/?name=<name to search>
+ *    -- Path: /artist?name=<name to search>
  *    -- Params: id
  *    -- Body: none
  */
@@ -58,7 +58,7 @@ export default {
   addPlaylist: (req: Request, res: Response) => {
     const newPlaylist = new Playlist({
       name: req.body.name,
-      playlists: req.body.playlists,
+      songs: req.body.songs,
       seconds: req.body.seconds,
       genres: req.body.genres,
     });
@@ -67,7 +67,7 @@ export default {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(401).json({ success: false, msg: err.msg });
+        res.status(400).json({ success: false, msg: err.msg });
         throw err;
       });
   },
@@ -80,7 +80,7 @@ export default {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: 'Get failed. Playlists not found.' });
+        res.status(400).send({ success: false, msg: 'Get failed. Playlists not found.' });
         throw err;
       });
   },
@@ -101,7 +101,7 @@ export default {
         res.status(200).send(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: 'Get failed. Playlist not found.' });
+        res.status(400).send({ success: false, msg: 'Get failed. Playlist not found.' });
         throw err;
       });
   },
@@ -111,7 +111,7 @@ export default {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: err.msg });
+        res.status(400).send({ success: false, msg: err.msg });
         throw err;
       });
   },
@@ -122,12 +122,12 @@ export default {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: err.msg });
+        res.status(400).send({ success: false, msg: err.msg });
         throw err;
       });
   },
   deletePlaylistById: (req: Request, res: Response) => {
-    Playlist.deleteOne({ name: req.params.id })
+    Playlist.findByIdAndDelete(req.params.id)
       .then((playlist) => {
         res.status(200).json(playlist);
       })
@@ -138,12 +138,12 @@ export default {
   },
   deletePlaylistByName: (req: Request, res: Response) => {
     // @ts-ignore
-    Playlist.deleteOne({ name: req.query.name })
+    Playlist.findOneAndDelete({ name: req.query.name })
       .then((playlist) => {
         res.status(200).json(playlist);
       })
       .catch((err) => {
-        res.status(401).send({ success: false, msg: err.msg });
+        res.status(400).send({ success: false, msg: err.msg });
         throw err;
       });
   },

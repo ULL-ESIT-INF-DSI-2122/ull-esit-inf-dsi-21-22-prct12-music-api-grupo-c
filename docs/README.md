@@ -68,7 +68,7 @@ Los objetivos concretos a la hora de finalizar las prácticas son:
 - La API desplegada en un servidor de Heroku y configurada para conectarse a la base de datos
 - Una base de datos en el servicio en la nube MongoDB Atlas
 - Un informe del proceso redactado y publicado en Github Pages
--
+
 ***
 ## Actividades previas
 
@@ -170,6 +170,27 @@ const uri: string = process.env.MAIN_DB_URL || 'mongodb://localhost:27017/';
 Esta configuración añade además una capa de seguridad extra al ocultar las credenciales de acceso a la base de datos en MongoDB Atlas.
 
 ### Publicación en Heroku
+
+Una vez en el proyecto se aprueba una *Pull Request* y se fusionan los cambios en la rama principal (`master`) se considera que una nueva característica ha sido probada y añadida al proyecto por lo que se pueden publicar los cambios en el servidor de *Heroku*.
+
+Para publicar en el servidor se hace uso de la interfaz de línea de comandos que ofrece la herramienta de `heroku` para ello. El primer paso es, si se dispone de una cuenta en el soporte web, iniciar sesión con las credenciales mediante el comando `heroku login` que abre automáticamente una ventana del explorador web para iniciar sesión en él. Cuando el inicio de sesión se completa con éxito se puede pasar a hacer uso de la interfaz para publicar los cambios a través de los comandos de *git* como si de un repositorio remoto se tratase, no antes de crear una nueva aplicación en la aplicación web de gestión de heroku.
+
+Dentro de la interfaz, en el botón "New" se selecciona la opción "Create new app" para añadir una nueva sección a la que publicar la página.
+
+![](./images/heroku_new_repo.png)
+
+Si se crea correctamente pasará a estar en la lista de aplicaciones y desde ahí acceder al panel de gestión de la aplicación.
+
+![](./images/heroku_apps_list.png)
+
+Dentro de la interfaz en la sección "Deploy" se puede seleccionar el método de despliegue, en este caso y como primera opción se hace uso de la Heroku Git CLI para poder controlar el despliegue manualmente. Pendiente de aceptar el uso de Heroku desde Github también se considera el desarrollo de un *workflow* de Github Actions para el despliegue automático con cada *push* a la rama principal.
+
+Lo primero para aplicar el despliegue manual es registrar el servidor de heroku como repositorio remoto del proyecto, para lo que se ejecuta el comando `git remote add heroku {url del repoistorio}`.
+Cuando el repositorio remoto es añadido basta con hacer, si ya se ha añadido al control de versiones, un *push* de los cambios al repositorio de heroku ejecutando `git push heroku master`.
+
+Sin embargo, antes de lanzar los cambios de heroku se considera pertinente añadir un script al `package.json` para ejecutar antes de la construcción de la aplicación, este script debe ser nombrado como `heroku-prebuild`. En este script se debe, al menos, instalar los paquetes de node del repositorio.
+
+Cuando el comando de subida del repositorio se ejecuta comienzan las tareas de construcción y ejecución de la API en el servidor, cuyo proceso es registrado en la línea de comandos, cuando todas las tareas se cumplen de manera satisfactoria provee un enlace desde el cual acceder al servicio online, en este caso la aplicación es desplegada en la url [https://dsi-p12-g-c.herokuapp.com/](https://dsi-p12-g-c.herokuapp.com/). Alternativamente se puede acceder desde el botón "Open app" de la interfaz web del servicio en heroku.
 
 ### Creación de la base de datos en MongoDB Atlas
 

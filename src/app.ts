@@ -4,6 +4,7 @@ import path from 'path';
 // ROUTES
 import songs from './routes/song.route';
 import artists from './routes/artist.route';
+import playlists from './routes/playlist.route';
 // ------
 
 const app = express();
@@ -18,6 +19,7 @@ app.get('/', (_: express.Request, res: express.Response) => {
 
 app.use('/songs', songs);
 app.use('/artists', artists);
+app.use('/playlists', playlists);
 
 // Find 404
 app.all('*', (req: express.Request, res: express.Response, next: express.NextFunction) => {

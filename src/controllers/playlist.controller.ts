@@ -26,7 +26,7 @@ import { Playlist } from '../models/playlist.model';
  *    -- Body: none
  *
  *  - getPlaylistByName: finds a playlist using the name in the query string
- *    -- Path: /playlist/?name=<name to search>
+ *    -- Path: /playlist?name=<name to search>
  *    -- Params: none
  *    -- Body: none
  *
@@ -38,7 +38,7 @@ import { Playlist } from '../models/playlist.model';
  *
  *   - updatePlaylistByName: finds and updates a playlist using the name in the query
  *  string with a given JSON
- *    -- Path: /artist/?name=<name to search>
+ *    -- Path: /artist?name=<name to search>
  *    -- Params: none
  *    -- Body: Playlist model JSON
  *
@@ -48,7 +48,7 @@ import { Playlist } from '../models/playlist.model';
  *    -- Body: none
  *
  *   - deletePlaylistByName: delete a playlist using name in the query string
- *    -- Path: /artist/?name=<name to search>
+ *    -- Path: /artist?name=<name to search>
  *    -- Params: id
  *    -- Body: none
  */
@@ -127,7 +127,7 @@ export default {
       });
   },
   deletePlaylistById: (req: Request, res: Response) => {
-    Playlist.deleteOne({ name: req.params.id })
+    Playlist.findByIdAndDelete(req.params.id)
       .then((playlist) => {
         res.status(200).json(playlist);
       })

@@ -14,34 +14,34 @@ import { Song } from '../models/song.model';
  *    -- Path: /songs
  *    -- Params: none
  *    -- Body: none
- * 
+ *
  *  - getSongByName: finds a song using the name in the query string
  *    -- Path: /songs?name=<name to search>
  *    -- Params: none
  *    -- Body: none
- * 
+ *
  *  - getSongById: finds a song using the song ID as param
  *    -- Path: /songs/:id
  *    -- Params: id
  *    -- Body: none
- * 
+ *
  *  - addSong: add a song to the database
  *    -- Path: /songs
  *    -- Params: none
  *    -- Body: Song model JSON
- * 
+ *
  *   - deleteSong: delete a song using a song ID as param
  *    -- Path: /artist/:id
  *    -- Params: id
  *    -- Body: none
- * 
+ *
  *   - updateSongByName: finds and update a song using the name in the query
  *  string with a given JSON
  *    -- Path: /artist?name=<name to search>
  *    -- Params: none
  *    -- Body: Song model JSON
- * 
- *   - updateSongByName: finds and updates a song using the song ID as param 
+ *
+ *   - updateSongByName: finds and updates a song using the song ID as param
  *  with a given JSON
  *    -- Path: /artist/:id
  *    -- Params: id
@@ -98,8 +98,19 @@ export default {
         throw err;
       });
   },
-  deleteSong: (req: Request, res: Response) => {
-    Song.deleteOne({ name: req.params.song })
+  deleteSongById: (req: Request, res: Response) => {
+    Song.findByIdAndDelete(req.params.id)
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(401).json({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  deleteSongByName: (req: Request, res: Response) => {
+    // @ts-ignore
+    Song.findOneAndDelete({ name: req.query.name })
       .then((result) => {
         res.status(200).json(result);
       })

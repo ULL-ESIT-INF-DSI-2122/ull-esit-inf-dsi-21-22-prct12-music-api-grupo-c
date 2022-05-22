@@ -8,8 +8,8 @@ playlistRouter.get('/:id', playlistController.getPlaylistById);
 playlistRouter.get('/', playlistController.matchNameQuery, playlistController.getPlaylistByName);
 playlistRouter.put('/:id', playlistController.updatePlaylistById);
 playlistRouter.put('/', playlistController.matchNameQuery, playlistController.updatePlaylistByName);
-playlistRouter.delete('/:id', playlistController.deletePlaylistById);
 playlistRouter.delete('/', playlistController.matchNameQuery, playlistController.deletePlaylistByName);
+playlistRouter.delete('/:id', playlistController.deletePlaylistById);
 
 /**
  * # Playlists Router | Express Router object
@@ -17,13 +17,13 @@ playlistRouter.delete('/', playlistController.matchNameQuery, playlistController
  *
  * ##Routes:
  * - GET: `/` (Get all playlists)
- * - GET: `/?name=name value` (Get a playlist by name)
+ * - GET: `?name=name value` (Get a playlist by name)
  * - GET: `/:id` (Get a playlist by ID)
  * - POST: `/` (Post Playlist)
- * - PUT: `/?name=name value` (Update Playlist using name in the query string)
+ * - PUT: `?name=name value` (Update Playlist using name in the query string)
  * - PUT: `/:id` (Udpate Playlist by ID)
  * - DELETE: `/:id` (Delete playlist by ID)
- * - DELETE: `/?name=name value` (Delete playlist using name in the query string)
+ * - DELETE: `?name=name value` (Delete playlist using name in the query string)
  */
 
 export default playlistRouter;

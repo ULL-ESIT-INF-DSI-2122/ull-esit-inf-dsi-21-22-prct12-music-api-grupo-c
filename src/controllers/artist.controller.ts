@@ -89,13 +89,24 @@ export default {
         throw err;
       });
   },
-  deleteArtist: (req: Request, res: Response) => {
-    Artist.deleteOne({ name: req.params.artist })
+  deleteArtistById: (req: Request, res: Response) => {
+    Artist.findByIdAndDelete(req.params.id)
       .then((result) => {
         res.status(200).json(result);
       })
       .catch((err) => {
         res.status(400).json({ success: false, msg: err.msg });
+        throw err;
+      });
+  },
+  deleteArtistByName: (req: Request, res: Response) => {
+    // @ts-ignore
+    Artist.deleteOne({ name: req.query.name })
+      .then((artist) => {
+        res.status(200).json(artist);
+      })
+      .catch((err) => {
+        res.status(401).send({ success: false, msg: err.msg });
         throw err;
       });
   },

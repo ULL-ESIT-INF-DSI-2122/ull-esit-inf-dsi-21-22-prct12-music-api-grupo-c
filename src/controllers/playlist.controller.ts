@@ -58,7 +58,7 @@ export default {
   addPlaylist: (req: Request, res: Response) => {
     const newPlaylist = new Playlist({
       name: req.body.name,
-      playlists: req.body.playlists,
+      songs: req.body.songs,
       seconds: req.body.seconds,
       genres: req.body.genres,
     });
